@@ -1,5 +1,5 @@
 # node-stream-server
-One way data streamer over TCP. Implementation test.
+One way data streamer over TCP. Implementation test. The idea was to go from tcp -> http -> websockets but browsers sadly do not speak tcp.
 
 # usage
 ```bash
