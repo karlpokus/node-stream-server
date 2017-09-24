@@ -1,6 +1,6 @@
 var net = require('net'),
     server = net.createServer(),
-    PORT = 8080,
+    PORT = 9876,
     HOST = 'localhost';
 
 function log(socket) {
@@ -16,22 +16,22 @@ server
   .on('connection', function(socket){
     log(socket);
     var timer;
-    
+
     socket.on('close', function(data) {
       clearInterval(timer);
       console.log('TCP CONNECTION CLOSED');
     });
-  
+
     function payload() {
       var ts = Date.now();
       socket.write(ts + '\r\n');
     }
-    
-    timer = setInterval(payload, 500);
-    // echo -> socket.pipe(socket);
+
+    //timer = setInterval(payload, 2000);
+    socket.pipe(socket);
   })
   .on('error', function(err){
-    throw err;
+    console.error(err);
   })
   .listen(PORT, HOST, function(){
     console.log('server listening on', HOST, PORT);
